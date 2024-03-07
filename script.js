@@ -5,7 +5,7 @@ let score = 20;
 let highscore = 0;
 console.log(winNumber);
 
-function hideMessage(msg) {
+function postMessage(msg) {
     document.querySelector('.message').textContent = msg
 }
 
@@ -16,16 +16,16 @@ document.querySelector('.again').addEventListener('click', function() {
     document.querySelector('body').style.backgroundColor = '#000';
     document.querySelector('.number').textContent = '?';
     document.querySelector('.guess').value = '';
-    hideMessage('Start playing');
+    postMessage('Start playing');
     winNumber = Math.trunc(Math.random() * 20) + 1;
 })
 document.querySelector('.check').addEventListener('click', function() {
     const guess = document.querySelector('.guess').value;
 
     if (guess < 1 || guess > 20) {
-        hideMessage('Oups 😞  ! Choose a number between 1 and 20');
+        postMessage('Oups 😞  ! Choose a number between 1 and 20');
     } else if (guess == winNumber) {
-        hideMessage('Congraturations 😍 this is a correct Number');
+        postMessage('Congraturations 😍 this is a correct Number');
         document.querySelector('.number').textContent = winNumber;
         document.body.style.backgroundColor = '#34CC17';
 
@@ -35,13 +35,14 @@ document.querySelector('.check').addEventListener('click', function() {
         }
     } else if (guess !== winNumber) {
         if (score > 1) {
-            hideMessage(guess > winNumber ? 'Too high!' : 'Too Low!');
+            postMessage(guess > winNumber ? 'Too high!' : 'Too Low!');
             score--;
             document.querySelector('.score').textContent = score;
         } else {
-            hideMessage('You lost the game!');
+            postMessage('You lost the game!');
             document.querySelector('.score').textContent = 0;
         }
+
     }
 });
 
